@@ -24,10 +24,6 @@ function Navbar() {
           href="/"
           className="group flex font-serif text-3xl  text-stone-900 transition-colors duration-200 hover:opacity-80"
         >
-          {/* <Button
-            className="flex font-serif text-3xl  text-stone-900"
-            variant="ghost"
-          > */}
           <p className="tracking-wide">
             Patient
             <span className="text-green-800 italic transition-colors duration-200 group-hover:text-green-700">
@@ -35,11 +31,9 @@ function Navbar() {
               Intake
             </span>
           </p>
-
-          {/* </Button> */}
         </Link>
 
-        {/* สำหรับ dev สลับแถบง่ายๆ ปรับบรรทัด 22 เป็น justify-center */}
+        {/* switch tab for dev */}
         {/* <NavigationMenu>
           <NavigationMenuList>
             <NavigationMenuItem className="flex space-x-1 rounded-sm border bg-stone-100 p-1">
