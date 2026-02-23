@@ -18,11 +18,11 @@ function Navbar() {
   const pathname = usePathname();
 
   return (
-    <nav className="px-auto fixed flex w-full flex-row items-center justify-center border-b border-stone-300 bg-stone-50 py-3">
-      <div className="flex w-full max-w-2xl items-center justify-between">
+    <nav className="fixed left-0 right-0 top-0 z-50 flex w-full items-center justify-center border-b border-stone-300 bg-stone-50 px-4 py-3">
+      <div className="flex w-full max-w-3xl items-center justify-between">
         <Link
           href="/"
-          className="group flex font-serif text-3xl text-stone-900 transition-colors duration-200 hover:opacity-80"
+          className="group flex font-serif text-3xl  text-stone-900 transition-colors duration-200 hover:opacity-80"
         >
           {/* <Button
             className="flex font-serif text-3xl  text-stone-900"
@@ -76,13 +76,21 @@ function Navbar() {
         </NavigationMenu> */}
         {/* <div className=""></div> */}
         <Link href="/" className={`${pathname === "/" ? "hidden" : "flex"}`}>
-          <Button className="flex font-light text-base text-stone-800" variant="link">
-            <ArrowLeft /> Back
+          <Button
+            className="flex font-serif font-light text-lg md:text-xl text-stone-800"
+            variant="link"
+          >
+            <ArrowLeft size={16} className="md:hidden mr-1" />
+            <ArrowLeft size={20} className="hidden md:inline mr-2" />
+            <span className="hidden md:inline">Back to home</span>
+            <span className="md:hidden">Back</span>
           </Button>
         </Link>
       </div>
     </nav>
   );
 }
-
 export default Navbar;
+
+
+

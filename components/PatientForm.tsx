@@ -143,7 +143,7 @@ function PatientForm() {
   };
   return (
     <div className="flex min-h-screen pt-20 flex-col items-center justify-center px-4 py-8 sm:px-6 lg:px-8">
-      <form onSubmit={submit} className="w-full max-w-2xl space-y-8">
+      <form onSubmit={submit} className="w-full max-w-3xl space-y-8">
         <div className="space-y-3 text-center">
           <h1 className="mt-5 text-3xl font-serif sm:text-4xl md:text-5xl">
             Patient <span className="italic text-green-800">Form</span>
@@ -465,7 +465,7 @@ function PatientForm() {
         <div className="flex justify-center">
           <Button
             type="submit"
-            className="px-8 py-5 bg-green-900 uppercase text-white font-light hover:bg-green-800 focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
+            className="px-8 font-serif py-5 bg-green-900 uppercase text-white text-xl tracking-widest  hover:bg-green-800 focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
           >
             Submit Form
           </Button>

@@ -22,7 +22,7 @@ function StaffViewForm() {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center px-4 py-8 pt-20 sm:px-6 lg:px-8">
-      <div className="w-full max-w-2xl space-y-8">
+      <div className="w-full max-w-3xl space-y-8">
         <div className="space-y-3 text-center">
           <h1 className="mt-5 font-serif text-3xl text-stone-900 sm:text-4xl md:text-5xl">
             Patient <span className="text-green-800 italic">Overview</span>
