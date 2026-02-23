@@ -19,11 +19,24 @@ function Navbar() {
 
   return (
     <nav className="px-auto fixed flex w-full flex-row items-center justify-center border-b border-stone-300 bg-stone-50 py-3">
-      <div className="flex w-full max-w-2xl items-center justify-start">
-        <Link href="/">
-          <Button className="flex font-light text-stone-500" variant="ghost">
-            <ArrowLeft /> Back
-          </Button>
+      <div className="flex w-full max-w-2xl items-center justify-between">
+        <Link
+          href="/"
+          className="group flex font-serif text-3xl text-stone-900 transition-colors duration-200 hover:opacity-80"
+        >
+          {/* <Button
+            className="flex font-serif text-3xl  text-stone-900"
+            variant="ghost"
+          > */}
+          <p className="tracking-wide">
+            Patient
+            <span className="text-green-800 italic transition-colors duration-200 group-hover:text-green-700">
+              {" "}
+              Intake
+            </span>
+          </p>
+
+          {/* </Button> */}
         </Link>
 
         {/* สำหรับ dev สลับแถบง่ายๆ ปรับบรรทัด 22 เป็น justify-center */}
@@ -62,6 +75,11 @@ function Navbar() {
           </NavigationMenuList>
         </NavigationMenu> */}
         {/* <div className=""></div> */}
+        <Link href="/" className={`${pathname === "/" ? "hidden" : "flex"}`}>
+          <Button className="flex font-light text-base text-stone-800" variant="link">
+            <ArrowLeft /> Back
+          </Button>
+        </Link>
       </div>
     </nav>
   );

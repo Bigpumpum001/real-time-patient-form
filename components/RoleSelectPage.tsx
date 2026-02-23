@@ -24,14 +24,17 @@ export default function RoleSelectPage() {
       <div className="flex flex-1 flex-col items-center justify-center px-6 py-16">
         {/* Heading */}
         <div className="mb-14 text-center">
+          <p className="text-base tracking-[0.18em] text-stone-400 uppercase">
+            Welcome
+          </p>
           <h1 className="font-serif text-5xl leading-[1.05] tracking-tight text-stone-900 sm:text-6xl">
-            Select your 
-            <span className="text-emerald-700"> role?</span>
+            Select your
+            <span className="text-emerald-700"> role</span>
           </h1>
         </div>
 
         {/* Cards */}
-        <div className="grid w-full max-w-xl grid-cols-1 gap-4 sm:grid-cols-2">
+        <div className="grid w-full max-w-2xl grid-cols-1 gap-5 sm:grid-cols-2">
           {roles.map(({ href, role, description, tag, accent }) => (
             <Link
               key={href}
@@ -41,7 +44,7 @@ export default function RoleSelectPage() {
               {/* Top */}
               <div className="mb-10">
                 <span
-                  className={`mb-5 inline-block rounded border px-2 py-0.5 font-mono text-[9px] tracking-[0.14em] uppercase ${
+                  className={`mb-5 inline-block rounded border px-2 py-0.5 text-xs tracking-[0.14em] uppercase ${
                     accent === "emerald"
                       ? "border-emerald-200 bg-emerald-50 text-emerald-700"
                       : "border-stone-200 bg-stone-50 text-stone-400"
@@ -50,18 +53,18 @@ export default function RoleSelectPage() {
                   {tag}
                 </span>
 
-                <h2 className="mb-3 font-serif text-4xl leading-none tracking-tight text-stone-900">
+                <h2 className="mb-3 font-serif text-5xl leading-none tracking-tight text-stone-900">
                   {role}
                 </h2>
 
-                <p className="font-mono text-[12px] leading-relaxed whitespace-pre-line text-stone-400">
+                <p className="text-base leading-relaxed whitespace-pre-line text-stone-400">
                   {description}
                 </p>
               </div>
 
               {/* Arrow */}
               <div
-                className={`flex items-center gap-2 font-mono text-[11px] tracking-widest uppercase transition-colors duration-150 ${
+                className={`flex items-center gap-2 text-xs tracking-widest uppercase transition-colors duration-150 ${
                   accent === "emerald"
                     ? "text-emerald-600 group-hover:text-emerald-700"
                     : "text-stone-400 group-hover:text-stone-600"
@@ -80,8 +83,6 @@ export default function RoleSelectPage() {
             </Link>
           ))}
         </div>
-
-       
       </div>
     </main>
   );
