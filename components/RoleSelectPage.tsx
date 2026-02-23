@@ -23,7 +23,7 @@ export default function RoleSelectPage() {
       {/* Center content */}
       <div className="flex flex-1 flex-col items-center justify-center px-6 py-16">
         {/* Heading */}
-        <div className="mb-14 text-center">
+        <div className="mb-14 text-center mt-6 sm:mt-0">
           <p className="text-base tracking-[0.18em] text-stone-400 uppercase">
             Welcome
           </p>
