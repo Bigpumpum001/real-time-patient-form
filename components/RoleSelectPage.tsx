@@ -34,7 +34,7 @@ export default function RoleSelectPage() {
         </div>
 
         {/* Cards */}
-        <div className="grid w-full max-w-2xl grid-cols-1 gap-5 sm:grid-cols-2">
+        <div className="grid w-full max-w-3xl grid-cols-1 gap-5 sm:grid-cols-2">
           {roles.map(({ href, role, description, tag, accent }) => (
             <Link
               key={href}
