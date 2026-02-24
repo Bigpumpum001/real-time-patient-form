@@ -28,8 +28,8 @@ The two interfaces synchronize instantly using Socket.io, allowing staff to see 
 ### Staff View
 - **Real-time Display**: Shows patient input instantly as they type
 - **Status Indicators**: 
-  - 🟢 **Typing** - Patient is actively filling the form
-  - 🔵 **Submitted** - Form has been submitted
+  - 🟠 **Typing** - Patient is actively filling the form
+  - 🟢 **Submitted** - Form has been submitted
   - ⚪ **Inactive** - No activity for 30 seconds
 - **Responsive Design**: Works on all screen sizes
 
