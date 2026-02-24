@@ -9,7 +9,7 @@ This system provides two main interfaces:
 - **Patient Form**: A responsive form where patients can enter their personal information
 - **Staff View**: A real-time interface for staff members to monitor patient form submissions
 
-The two interfaces synchronize instantly using WebSockets, allowing staff to see patient input in real-time as it's being entered.
+The two interfaces synchronize instantly using Socket.io, allowing staff to see patient input in real-time as it's being entered.
 
 ## ✨ Features
 
@@ -36,7 +36,7 @@ The two interfaces synchronize instantly using WebSockets, allowing staff to see
 ## 🔄 Real-Time Architecture
 
 ### Real-Time Synchronization
-- **WebSocket Technology**: Instant data synchronization using Socket.io
+- **Real-time Communication**: Powered by Socket.io for instant data synchronization
 - **Inactivity Detection**: Automatically sets status to inactive after 30 seconds
 - **The staff view always reflects the latest active patient session (last input wins).**
 
@@ -59,56 +59,56 @@ If a new patient starts typing, the staff view will update to the latest session
 
 - Simple and minimal medical-friendly UI
 - Large input fields for accessibility
-- Real-time feedback for staff monitoring
+- Real-time input monitoring for staff 
 - Mobile-first responsive layout
 - Clear visual status indicators for staff awareness
 
 ## 🛠️ Tech Stack
 
-- **Framework**: Next.js 16.1.6 with App Router
-- **Styling**: TailwindCSS
-- **Real-time**: Socket.io for WebSocket communication
-- **Validation**: Zod for form validation
+- **Framework**: Next.js (App Router)
+- **Styling**: Tailwind CSS
+- **Real-time**: Socket.io (WebSocket)
+- **Validation**: Zod
 - **UI Components**: shadcn/ui
 - **TypeScript**: Full type safety
 - **Deployment**:
   - Frontend: Vercel
-  - WebSocket Server: Docker + Google Cloud Run
+  - Socket.io Server: Docker + Google Cloud Run
 
 ## 📁 Project Structure
 
 ```
 frontend/
 ├── app/                    # Next.js App Router pages
-│   ├── patient/           # Patient form page
-│   ├── staff/             # Staff view page
-│   ├── layout.tsx         # Root layout
-│   └── page.tsx           # Role selection page
-├── components/            # React components
-│   ├── PatientForm.tsx    # Patient input form
-│   ├── StaffViewForm.tsx  # Staff monitoring interface
-│   ├── RoleSelectPage.tsx # Landing page
-│   ├── navbar.tsx         # Navigation bar
-│   └── ui/               # Reusable UI components (shadcn/ui)
-├── lib/                   # Utility libraries
-│   ├── socket.ts         # Socket.io client configuration
-│   ├── utils.ts          # Helper functions
-│   └── validation.ts     # Form validation schemas (ใช้ zod)
-├── server/                # Backend server
-│   └── socket.ts         # WebSocket server logic
-├── types/                 # TypeScript type definitions
-│   └── form.ts           # Form data types
-├── public/               # Static assets
-├── compose.yaml          # Docker Compose configuration
-├── Dockerfile           # Docker container setup
-└── package.json         # Dependencies and scripts
+│   ├── patient/            # Patient form page
+│   ├── staff/              # Staff view page
+│   ├── layout.tsx          # Root layout
+│   └── page.tsx            # Role selection (entry page)
+├── components/             # React components
+│   ├── PatientForm.tsx     # Patient input form
+│   ├── StaffViewForm.tsx   # Staff monitoring interface
+│   ├── RoleSelectPage.tsx  # Landing page
+│   ├── navbar.tsx          # Navigation bar
+│   └── ui/                 # Reusable UI components (shadcn/ui)
+├── lib/                    # Utility libraries
+│   ├── socket.ts           # Socket.io client configuration
+│   ├── utils.ts            # Helper functions
+│   └── validation.ts       # Zod validation schemas
+├── server/                 # Backend server
+│   └── socket.ts           # Socket.io server logic
+├── types/                  # TypeScript type definitions
+│   └── form.ts             # Form data types
+├── public/                 # Static assets
+├── compose.yaml            # Docker Compose configuration
+├── Dockerfile              # Docker container setup
+└── package.json            # Dependencies and scripts
 ```
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js 18+ 
-- npm or yarn
+- Node.js 18+ (required for Next.js and Socket server)
+- npm
 
 ### Installation
 
@@ -124,7 +124,7 @@ npm install
 ```
 
 3. **Set up environment variables**:
-Create a `.env.local` file:
+Create a `.env.local` file (for local development):
 ```env
 NEXT_PUBLIC_APP_URL=http://localhost:3000
 PORT=3001
@@ -137,7 +137,7 @@ NEXT_PUBLIC_SOCKET_URL=http://localhost:3001
 ```bash
 npm run dev:full
 ```
-This starts both the Next.js dev server (port 3000) and Socket server (port 3001) concurrently.
+This starts both the Next.js dev server (port 3000) and Socket.io server (port 3001) concurrently.
 
 **Option 2: Manual Setup**
 ```bash
@@ -154,9 +154,9 @@ npm run dev
 - **Patient Form**: http://localhost:3000/patient
 - **Staff View**: http://localhost:3000/staff
 
-## 🐳 Docker Deployment
+## 🐳 Optional: Docker Deployment (Socket Server)
 
-### Run WebSocket Server with Docker
+### Option 3: Run Socket.io Server with Docker
 ```bash
 docker-compose up -d --build
 ```
@@ -193,7 +193,7 @@ npm run dev
 - **PatientForm**: Handles form state, validation, and real-time updates
 - **StaffViewForm**: Displays real-time data with status indicators
 - **RoleSelectPage**: Landing page for role selection
-- **Socket Integration**: Custom hooks for WebSocket management
+- **Socket Integration**: Custom hooks for Socket.io client management
 
 ## 🌐 Deployment
 
@@ -203,7 +203,7 @@ npm run dev
 3. Set environment variables in Vercel dashboard
 4. Deploy automatically on git push
 
-### Backend (WebSocket Server)
+### Backend (Socket.io Server)
 The Socket.io server is containerized with Docker and deployed on Google Cloud Run.
 
 Steps:
