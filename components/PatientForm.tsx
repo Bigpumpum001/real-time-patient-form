@@ -43,6 +43,9 @@ function PatientForm() {
   const [form, setForm] = useState<PatientFormData>(initialForm);
   const [date, setDate] = React.useState<Date>();
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const startMonth = new Date(1900, 0); // Jan 1900
+  const endMonth = new Date();
+
   useEffect(() => {
     const socket = getSocket();
     socket.connect();
@@ -64,7 +67,7 @@ function PatientForm() {
 
     // Clear error for this field
     if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: "" }));
+      setErrors((prev) => ({ ...prev, [name]: "" }));
     }
 
     const socket = getSocket();
@@ -82,7 +85,7 @@ function PatientForm() {
 
     // Clear error for this field
     if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: "" }));
+      setErrors((prev) => ({ ...prev, [name]: "" }));
     }
 
     const socket = getSocket();
@@ -102,7 +105,7 @@ function PatientForm() {
 
       // Clear error for date field
       if (errors.dateOfBirth) {
-        setErrors(prev => ({ ...prev, dateOfBirth: "" }));
+        setErrors((prev) => ({ ...prev, dateOfBirth: "" }));
       }
 
       const socket = getSocket();
@@ -130,7 +133,7 @@ function PatientForm() {
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       return;
     }
@@ -142,11 +145,11 @@ function PatientForm() {
     });
   };
   return (
-    <div className="flex min-h-screen pt-20 flex-col items-center justify-center px-4 py-8 sm:px-6 lg:px-8">
+    <div className="flex min-h-screen flex-col items-center justify-center px-4 py-8 pt-20 sm:px-6 lg:px-8">
       <form onSubmit={submit} className="w-full max-w-3xl space-y-8">
         <div className="space-y-3 text-center">
-          <h1 className="mt-5 text-3xl font-serif sm:text-4xl md:text-5xl">
-            Patient <span className="italic text-green-800">Form</span>
+          <h1 className="mt-5 font-serif text-3xl sm:text-4xl md:text-5xl">
+            Patient <span className="text-green-800 italic">Form</span>
           </h1>
           <p className="font-light text-stone-400">
             Fields marked <span className="text-red-500">*</span> are required
@@ -154,7 +157,7 @@ function PatientForm() {
         </div>
         <div className="space-y-3">
           <div className="flex w-full items-center space-x-4">
-            <p className="uppercase text-stone-500">Personal Information</p>
+            <p className="text-stone-500 uppercase">Personal Information</p>
             <div className="h-px grow bg-slate-200" />
           </div>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -164,7 +167,7 @@ function PatientForm() {
               </div>
               <Input
                 className={`border-stone-300 bg-white placeholder:text-stone-300 focus-visible:border-green-800 focus-visible:ring-[1px] ${
-                  errors.firstName && "border-red-500" 
+                  errors.firstName && "border-red-500"
                 }`}
                 name="firstName"
                 placeholder="First Name"
@@ -215,7 +218,7 @@ function PatientForm() {
                   <Button
                     variant="outline"
                     data-empty={!date}
-                    className={`w-full justify-between border-stone-300 bg-white text-left font-normal placeholder:text-stone-300 data-[empty=true]:text-muted-foreground ${
+                    className={`data-[empty=true]:text-muted-foreground w-full justify-between border-stone-300 bg-white text-left font-normal placeholder:text-stone-300 ${
                       errors.dateOfBirth && "border-red-500"
                     }`}
                   >
@@ -230,6 +233,12 @@ function PatientForm() {
                     selected={date}
                     onSelect={handleDateChange}
                     defaultMonth={date}
+                    captionLayout="dropdown-years"
+                    startMonth={startMonth}
+                    endMonth={endMonth}
+                    disabled={{
+                      after: new Date(),
+                    }}
                   />
                 </PopoverContent>
               </Popover>
@@ -244,9 +253,11 @@ function PatientForm() {
               <Select
                 onValueChange={(value) => handleSelectChange("gender", value)}
               >
-                <SelectTrigger className={`w-full border-stone-300 bg-white placeholder:text-stone-300 ${
-                  errors.gender && "border-red-500"
-                }`}>
+                <SelectTrigger
+                  className={`w-full border-stone-300 bg-white placeholder:text-stone-300 ${
+                    errors.gender && "border-red-500"
+                  }`}
+                >
                   <SelectValue placeholder="Select" />
                 </SelectTrigger>
                 {errors.gender && (
@@ -265,7 +276,7 @@ function PatientForm() {
         </div>
         <div className="space-y-3">
           <div className="flex w-full items-center space-x-4">
-            <p className="uppercase text-stone-500">Contact Details</p>
+            <p className="text-stone-500 uppercase">Contact Details</p>
             <div className="h-px grow bg-slate-200" />
           </div>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -327,7 +338,7 @@ function PatientForm() {
         </div>
         <div className="space-y-3">
           <div className="flex w-full items-center space-x-4">
-            <p className="uppercase text-stone-500">Background</p>
+            <p className="text-stone-500 uppercase">Background</p>
             <div className="h-px grow bg-slate-200" />
           </div>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -340,13 +351,17 @@ function PatientForm() {
                   handleSelectChange("preferredLanguage", value)
                 }
               >
-                <SelectTrigger className={`w-full border-stone-300 bg-white placeholder:text-stone-300 ${
-                  errors.preferredLanguage && "border-red-500"
-                }`}>
+                <SelectTrigger
+                  className={`w-full border-stone-300 bg-white placeholder:text-stone-300 ${
+                    errors.preferredLanguage && "border-red-500"
+                  }`}
+                >
                   <SelectValue placeholder="Select" />
                 </SelectTrigger>
                 {errors.preferredLanguage && (
-                  <p className="text-sm text-red-500">{errors.preferredLanguage}</p>
+                  <p className="text-sm text-red-500">
+                    {errors.preferredLanguage}
+                  </p>
                 )}
                 <SelectContent>
                   <SelectGroup>
@@ -404,7 +419,7 @@ function PatientForm() {
         </div>
         <div className="space-y-3">
           <div className="flex w-full items-center space-x-4">
-            <p className="uppercase text-stone-500">Emergency Contact</p>
+            <p className="text-stone-500 uppercase">Emergency Contact</p>
             <div className="h-px grow bg-slate-200" />
           </div>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -465,7 +480,7 @@ function PatientForm() {
         <div className="flex justify-center">
           <Button
             type="submit"
-            className="px-8 font-serif py-5 bg-green-900 uppercase text-white text-xl tracking-widest  hover:bg-green-800 focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
+            className="bg-green-900 px-8 py-5 font-serif text-xl tracking-widest text-white uppercase hover:bg-green-800 focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
           >
             Submit Form
           </Button>
